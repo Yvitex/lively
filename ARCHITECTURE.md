@@ -99,19 +99,19 @@ But there's an important distinction:
 
 Anything coming from:
 
-* an API
-* URL parameters
-* cookies
-* forms
-* local storage
-* third-party services
+- an API
+- URL parameters
+- cookies
+- forms
+- local storage
+- third-party services
 
 should still be validated.
 
 For example with Zod:
 
 ```ts
-import { z } from "zod"
+import { z } from 'zod'
 
 export const UserSchema = z.object({
   id: z.string(),
@@ -142,7 +142,7 @@ Client Component
 Don't begin every component with:
 
 ```ts
-"use client"
+'use client'
 ```
 
 Use Client Components when you need things like:
@@ -172,7 +172,7 @@ This can remain server-rendered.
 Then isolate interactivity:
 
 ```tsx
-"use client"
+'use client'
 
 export function AddToCartButton() {
   // interactive logic
@@ -181,10 +181,10 @@ export function AddToCartButton() {
 
 Keeping the client boundary small usually means:
 
-* less JavaScript shipped
-* faster hydration
-* better initial performance
-* less exposure of sensitive logic
+- less JavaScript shipped
+- faster hydration
+- better initial performance
+- less exposure of sensitive logic
 
 ---
 
@@ -268,13 +268,13 @@ For mutations, invalidate the relevant cached data rather than globally refreshi
 For example:
 
 ```ts
-revalidateTag("products")
+revalidateTag('products')
 ```
 
 or:
 
 ```ts
-revalidatePath("/products")
+revalidatePath('/products')
 ```
 
 Next.js explicitly integrates Server Actions with cache invalidation through APIs such as `revalidatePath` and `revalidateTag`. ([Next.js][3])
@@ -364,7 +364,7 @@ const result = schema.safeParse(payload)
 
 if (!result.success) {
   return {
-    error: "Invalid request",
+    error: 'Invalid request',
   }
 }
 ```
@@ -382,7 +382,7 @@ A logged-in user isn't automatically allowed to perform an action.
 Don't rely solely on:
 
 ```ts
-if (!session) redirect("/login")
+if (!session) redirect('/login')
 ```
 
 For sensitive operations, check authorization at the point where the operation happens.
@@ -460,12 +460,12 @@ For example:
 ```ts
 const securityHeaders = [
   {
-    key: "X-Content-Type-Options",
-    value: "nosniff",
+    key: 'X-Content-Type-Options',
+    value: 'nosniff',
   },
   {
-    key: "Referrer-Policy",
-    value: "strict-origin-when-cross-origin",
+    key: 'Referrer-Policy',
+    value: 'strict-origin-when-cross-origin',
   },
 ]
 ```
@@ -510,13 +510,13 @@ pnpm-lock.yaml
 Avoid random fetch calls scattered through components:
 
 ```tsx
-fetch("/api/users")
+fetch('/api/users')
 ```
 
 here, another:
 
 ```tsx
-axios.get("/api/orders")
+axios.get('/api/orders')
 ```
 
 somewhere else, and another entirely different abstraction later.
@@ -682,7 +682,7 @@ That makes production debugging much easier.
 Avoid depending on:
 
 ```ts
-console.log("hello")
+console.log('hello')
 ```
 
 for production diagnostics.
@@ -788,7 +788,7 @@ Whole utility libraries
 Use dynamic imports where appropriate:
 
 ```tsx
-const Editor = dynamic(() => import("./Editor"), {
+const Editor = dynamic(() => import('./Editor'), {
   ssr: false,
 })
 ```
@@ -804,13 +804,13 @@ Use bundle analysis periodically.
 Prefer:
 
 ```tsx
-import Image from "next/image"
+import Image from 'next/image'
 ```
 
 over:
 
 ```html
-<img>
+<img />
 ```
 
 when appropriate.
@@ -818,12 +818,7 @@ when appropriate.
 Specify dimensions:
 
 ```tsx
-<Image
-  src="/product.jpg"
-  alt="Product"
-  width={800}
-  height={600}
-/>
+<Image src="/product.jpg" alt="Product" width={800} height={600} />
 ```
 
 This helps avoid layout shifts and lets Next.js optimize delivery.
@@ -837,10 +832,10 @@ Next.js' App Router materials specifically include optimized image/font handling
 Prefer Next.js font optimization:
 
 ```ts
-import { Inter } from "next/font/google"
+import { Inter } from 'next/font/google'
 
 const inter = Inter({
-  subsets: ["latin"],
+  subsets: ['latin'],
 })
 ```
 
@@ -1220,17 +1215,19 @@ Logout
 With something like Playwright:
 
 ```ts
-test("user can log in", async ({ page }) => {
-  await page.goto("/login")
+test('user can log in', async ({ page }) => {
+  await page.goto('/login')
 
-  await page.getByLabel("Email").fill("user@example.com")
-  await page.getByLabel("Password").fill("password")
+  await page.getByLabel('Email').fill('user@example.com')
+  await page.getByLabel('Password').fill('password')
 
-  await page.getByRole("button", {
-    name: "Sign in",
-  }).click()
+  await page
+    .getByRole('button', {
+      name: 'Sign in',
+    })
+    .click()
 
-  await expect(page).toHaveURL("/dashboard")
+  await expect(page).toHaveURL('/dashboard')
 })
 ```
 
@@ -1817,4 +1814,3 @@ If the full list feels like a lot, get **these** right from day one:
 13. **Have preview/staging before production.**
 14. **Set up Sentry/logging/metrics before launch.**
 15. **Know how to roll back a broken deployment.**
-
