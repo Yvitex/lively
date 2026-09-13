@@ -25,22 +25,20 @@ const securityHeaders = [
     value: 'camera=(), geolocation=(), microphone=()',
   },
   { key: 'X-Frame-Options', value: 'DENY' },
-  ...(
-    isDev
-      ? []
-      : [
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age: 63072000; includeSubDomains; preload',
-          }
-        ]
-  ),
+  ...(isDev
+    ? []
+    : [
+        {
+          key: 'Strict-Transport-Security',
+          value: 'max-age: 63072000; includeSubDomains; preload',
+        },
+      ]),
 ]
 
 const nextConfig: NextConfig = {
-    async headers() {
-        return [{source: '/(.*)', headers: securityHeaders}]
-    }
+  async headers() {
+    return [{ source: '/(.*)', headers: securityHeaders }]
+  },
 }
 
 export default nextConfig

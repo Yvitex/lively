@@ -22,7 +22,9 @@ The backend that stores users and sends confirmation emails already exists as a 
 
 Read `06` before `04`/`05` even though it is numbered later: the components in `04`/`05` are specified there.
 
-Each document has the same shape: **Goal → Read first → Do → Do not → Done when.** "Read first" points at the Next.js docs bundled in `node_modules/next/dist/docs/` — this Next.js version differs from what you remember, so read those pages before writing code.
+`01` and `02` are short setup/reference docs (**Goal → Read first → Do → Do not → Done when**). `03`–`07` are step-by-step build docs (**Goal → Read first → Step 1, Step 2, … → Do not → Done when**): each step adds one small piece and ends with something you actually run — a test, a `curl`, a `pnpm dev` check — before the next step. Do not skip a verify; later steps assume the previous one passed. Where a file is added to across two documents (`src/features/auth/actions.ts`, built in `04` and extended in `05`), the second document shows only the addition, never the whole file again.
+
+"Read first" points at the Next.js docs bundled in `node_modules/next/dist/docs/` — this Next.js version differs from what you remember, so read those pages before writing code.
 
 ## Non-negotiables
 
